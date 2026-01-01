@@ -1,381 +1,294 @@
 const translations = {
-    en: {
-        dashboard: "Dashboard",
-        orders: "Orders",
-        analytics: "Analytics",
-        products: "Products",
-        customers: "Customers",
-        inventory: "Inventory",
-        reports: "Reports",
-        settings: "Settings",
-        nepalStats: "Nepal Statistics",
-        timezone: "Timezone:",
-        currency: "Currency:",
-        vat: "VAT Rate:",
-        searchPlaceholder: "Search orders, products, customers...",
-        ordersCompleted: "Orders Completed",
-        totalRevenue: "Total Revenue",
-        totalVisits: "Total Visits",
-        totalSales: "Total Sales",
-        fromLastMonth: "from last month",
-        revenueAnalytics: "Revenue Analytics (Last 6 Months)",
-        realityVsTarget: "Reality vs Target (Sales Goals)",
-        q1Target: "Q1 Target",
-        monthlyTarget: "Monthly Target",
-        weeklyTarget: "Weekly Target",
-        customerSatisfaction: "Customer Satisfaction Score",
-        basedOnReviews: "Based on 342 reviews",
-        recentOrders: "Recent Orders Overview",
-        viewAll: "View All",
-        orderId: "Order ID",
-        customer: "Customer",
-        date: "Date",
-        amount: "Amount",
-        status: "Status",
-        completed: "Completed",
-        processing: "Processing",
-        bestProducts: "Best Performing Products",
-        earningRevenue: "Earning Revenue (Net)",
-        afterDeductions: "After discounts & refunds:",
-        orderReserved: "Order Reserved from Website",
-        preOrders: "Pre-orders & reservations",
-        ourProducts: "Our Products (Listings & SKUs)",
-        newThisMonth: "8 new this month",
-        lowStock: "24 low in stock",
-        todaysSales: "Today's Sales",
-        fromYesterday: "from yesterday"
-    },
-    np: {
-        dashboard: "ड्यासबोर्ड",
-        orders: "अर्डरहरू",
-        analytics: "विश्लेषण",
-        products: "उत्पादनहरू",
-        customers: "ग्राहकहरू",
-        inventory: "सूची",
-        reports: "प्रतिवेदनहरू",
-        settings: "सेटिङहरू",
-        nepalStats: "नेपाल तथ्याङ्क",
-        timezone: "समय क्षेत्र:",
-        currency: "मुद्रा:",
-        vat: "भ्याट दर:",
-        searchPlaceholder: "अर्डर, उत्पादन, ग्राहक खोज्नुहोस्...",
-        ordersCompleted: "पूरा गरिएका अर्डरहरू",
-        totalRevenue: "कुल आय",
-        totalVisits: "कुल भ्रमणहरू",
-        totalSales: "कुल बिक्री",
-        fromLastMonth: "गत महिना भन्दा",
-        revenueAnalytics: "आय विश्लेषण (पछिल्लो ६ महिना)",
-        realityVsTarget: "वास्तविकता बनाम लक्ष्य (बिक्री लक्ष्य)",
-        q1Target: "प्रथम चौमासिक लक्ष्य",
-        monthlyTarget: "मासिक लक्ष्य",
-        weeklyTarget: "साप्ताहिक लक्ष्य",
-        customerSatisfaction: "ग्राहक सन्तुष्टि स्कोर",
-        basedOnReviews: "३४२ समीक्षा आधारित",
-        recentOrders: "हालैका अर्डरहरू",
-        viewAll: "सबै हेर्नुहोस्",
-        orderId: "अर्डर आईडी",
-        customer: "ग्राहक",
-        date: "मिति",
-        amount: "रकम",
-        status: "स्थिति",
-        completed: "पूरा भयो",
-        processing: "प्रशोधन हुदैछ",
-        bestProducts: "उत्कृष्ट उत्पादनहरू",
-        earningRevenue: "शुद्ध आय",
-        afterDeductions: "छुट र फिर्ता पछि:",
-        orderReserved: "वेबसाइटबाट आरक्षित अर्डर",
-        preOrders: "प्री-अर्डर र आरक्षणहरू",
-        ourProducts: "हाम्रा उत्पादनहरू (सूची र SKUs)",
-        newThisMonth: "यस महिना ८ नयाँ",
-        lowStock: "२४ कम स्टकमा",
-        todaysSales: "आजको बिक्री",
-        fromYesterday: "हिजो भन्दा"
-    }
+  en: {
+    dashboard: "Dashboard",
+    orders: "Orders",
+    analytics: "Analytics",
+    products: "Products",
+    customers: "Customers",
+    inventory: "Inventory",
+    reports: "Reports",
+    settings: "Settings",
+    searchPlaceholder: "Search orders, products, customers...",
+    ordersCompleted: "Orders Completed",
+    totalRevenue: "Total Revenue",
+    revenueAnalytics: "Revenue Analytics (Last 6 Months)",
+  },
+  np: {
+    dashboard: "ड्यासबोर्ड",
+    orders: "अर्डरहरू",
+    analytics: "विश्लेषण",
+    products: "उत्पादनहरू",
+    customers: "ग्राहकहरू",
+    inventory: "सूची",
+    reports: "प्रतिवेदनहरू",
+    settings: "सेटिङहरू",
+    searchPlaceholder: "अर्डर, उत्पादन, ग्राहक खोज्नुहोस्...",
+    ordersCompleted: "पूरा गरिएका अर्डरहरू",
+    totalRevenue: "कुल आय",
+    revenueAnalytics: "आय विश्लेषण (पछिल्लो ६ महिना)",
+  }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleSidebar = document.getElementById('toggleSidebar');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
-    const themeToggle = document.getElementById('themeToggle');
-    const currencyBtns = document.querySelectorAll('.currency-btn');
-    const languageOptions = document.querySelectorAll('.language-option');
-    const languageDropdown = document.getElementById('languageDropdown');
-    const exchangeRate = 133.5;
+document.addEventListener('DOMContentLoaded', () => {
+  // Elements
+  const languageBtn = document.getElementById('languageBtn');
+  const languageList = document.getElementById('languageList');
+  const currentLanguageSpan = document.getElementById('currentLanguage');
+  const themeToggle = document.getElementById('themeToggle');
+  const sidebar = document.getElementById('sidebar');
+  const toggleSidebar = document.getElementById('toggleSidebar');
+  const mainContent = document.getElementById('mainContent');
 
-    let currentLanguage = 'en';
-    let currentCurrency = 'usd';
+  // State
+  let currentLanguage = localStorage.getItem('language') || 'en';
+  let currentTheme = localStorage.getItem('theme') || 'light';
 
-    toggleSidebar.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
-        mainContent.classList.toggle('sidebar-active');
-    });
+  // Initialize theme
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeToggleIcon();
 
-    themeToggle.addEventListener('click', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        
-        const icon = themeToggle.querySelector('i');
-        const text = themeToggle.querySelector('span');
-        
-        if (newTheme === 'dark') {
-            icon.className = 'fas fa-sun';
-            if (text) text.textContent = ' Light Mode';
-            themeToggle.setAttribute('title', 'Switch to Light Mode');
-        } else {
-            icon.className = 'fas fa-moon';
-            if (text) text.textContent = ' Dark Mode';
-            themeToggle.setAttribute('title', 'Switch to Dark Mode');
-        }
-        
-        localStorage.setItem('theme', newTheme);
-    });
+  // Initialize language UI
+  setLanguageUI(currentLanguage);
+  updateTexts(currentLanguage);
 
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if (savedTheme === 'dark') {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  // Sidebar toggle
+  toggleSidebar.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    mainContent.classList.toggle('sidebar-active');
+  });
+
+  // Theme toggle
+  themeToggle.addEventListener('click', () => {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    updateThemeToggleIcon();
+  });
+
+  // Language dropdown toggle
+  languageBtn.addEventListener('click', () => {
+    const expanded = languageBtn.getAttribute('aria-expanded') === 'true';
+    languageBtn.setAttribute('aria-expanded', !expanded);
+    languageList.hidden = expanded;
+    if (!expanded) {
+      languageList.focus();
     }
+  });
 
-    currencyBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            currencyBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            currentCurrency = this.dataset.currency;
-            updateCurrencyDisplay();
-            localStorage.setItem('currency', currentCurrency);
-        });
+  // Language option selection
+  languageList.querySelectorAll('li').forEach(option => {
+    option.addEventListener('click', () => {
+      currentLanguage = option.dataset.lang;
+      localStorage.setItem('language', currentLanguage);
+      setLanguageUI(currentLanguage);
+      updateTexts(currentLanguage);
+      closeLanguageDropdown();
     });
 
-    languageOptions.forEach(option => {
-        option.addEventListener('click', function(e) {
-            e.preventDefault();
-            currentLanguage = this.dataset.lang;
-            updateLanguage();
-            
-            const dropdownText = languageDropdown.querySelector('span');
-            if (dropdownText) {
-                dropdownText.textContent = this.textContent;
-            } else {
-                languageDropdown.innerHTML = `<i class="fas fa-language"></i> ${this.textContent}`;
+    // Keyboard support for language options
+    option.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        option.click();
+      }
+    });
+  });
+
+  // Close language dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!languageBtn.contains(e.target) && !languageList.contains(e.target)) {
+      closeLanguageDropdown();
+    }
+  });
+
+  // Close dropdown helper
+  function closeLanguageDropdown() {
+    languageBtn.setAttribute('aria-expanded', false);
+    languageList.hidden = true;
+  }
+
+  // Update theme toggle icon and tooltip
+  function updateThemeToggleIcon() {
+    const icon = themeToggle.querySelector('i');
+    const span = themeToggle.querySelector('span');
+    if (currentTheme === 'dark') {
+      icon.className = 'fas fa-sun';
+      themeToggle.setAttribute('title', 'Switch to Light Mode');
+      if (span) span.textContent = 'Light Mode';
+    } else {
+      icon.className = 'fas fa-moon';
+      themeToggle.setAttribute('title', 'Switch to Dark Mode');
+      if (span) span.textContent = 'Dark Mode';
+    }
+  }
+
+  // Set UI language button and aria-selected on options
+  function setLanguageUI(lang) {
+    const languageName = lang === 'en' ? 'English' : 'नेपाली';
+    currentLanguageSpan.textContent = languageName;
+    languageList.querySelectorAll('li').forEach(li => {
+      li.setAttribute('aria-selected', li.dataset.lang === lang ? 'true' : 'false');
+    });
+  }
+
+  // Update all texts on the page according to language
+  function updateTexts(lang) {
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      const translation = translations[lang][key];
+      if (!translation) return;
+
+      if (el.tagName === 'INPUT') {
+        el.placeholder = translation;
+      } else {
+        el.textContent = translation;
+      }
+    });
+  }
+
+  // ---------------------------
+  // CURRENCY DISPLAY (Nepali Rs only)
+  // ---------------------------
+  const currencySymbol = 'रु';
+  const exchangeRate = 133.5; // For internal USD to NPR calculations if needed
+
+  // Update all currency amounts on the page
+  function updateCurrencyDisplay() {
+    document.querySelectorAll('.metric-value[data-usd]').forEach(el => {
+      const usdValue = parseFloat(el.getAttribute('data-usd'));
+      if (isNaN(usdValue)) return;
+
+      // Convert to NPR
+      const nprValue = usdValue * exchangeRate;
+      el.textContent = `${currencySymbol} ${nprValue.toLocaleString('en-IN', { minimumFractionDigits: 0 })}`;
+      el.classList.add('nepali-font');
+    });
+  }
+
+  updateCurrencyDisplay();
+
+  // ---------------------------
+  // CHART.JS - REVENUE CHART with English months only
+  // ---------------------------
+
+  const revenueCtx = document.getElementById('revenueChart');
+  if (revenueCtx) {
+    const revenueChart = new Chart(revenueCtx.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
+        datasets: [{
+          label: translations[currentLanguage].totalRevenue || 'Total Revenue',
+          data: [32000, 38000, 41000, 38500, 42580, 48000, 45000, 47000, 43000, 46000, 48000, 50000],
+          borderColor: '#4361ee',
+          backgroundColor: 'rgba(67, 97, 238, 0.1)',
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim() || '#000',
             }
-            
-            localStorage.setItem('language', currentLanguage);
-        });
-    });
-
-    function updateLanguage() {
-        const elements = document.querySelectorAll('[data-key]');
-        elements.forEach(element => {
-            const key = element.getAttribute('data-key');
-            if (translations[currentLanguage][key]) {
-                if (element.tagName === 'INPUT') {
-                    element.setAttribute('placeholder', translations[currentLanguage][key]);
-                } else {
-                    element.textContent = translations[currentLanguage][key];
-                }
-            }
-        });
-    }
-
-    function updateCurrencyDisplay() {
-        const currencyElements = document.querySelectorAll('.currency-amount, .metric-value[data-currency="true"], .goal-value');
-        
-        currencyElements.forEach(element => {
-            const usdValue = parseFloat(element.getAttribute('data-usd') || element.textContent.replace(/[^0-9.-]+/g, ""));
-            
-            if (!isNaN(usdValue)) {
-                if (currentCurrency === 'npr') {
-                    const nprValue = usdValue * exchangeRate;
-                    if (element.classList.contains('metric-value') || element.classList.contains('goal-value')) {
-                        element.textContent = `रु ${nprValue.toLocaleString('en-US', {
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0
-                        })}`;
-                    } else {
-                        element.textContent = `रु ${nprValue.toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })}`;
-                    }
-                    element.classList.add('nepali-font');
-                } else {
-                    if (element.classList.contains('metric-value') || element.classList.contains('goal-value')) {
-                        element.textContent = `$${usdValue.toLocaleString('en-US', {
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0
-                        })}`;
-                    } else {
-                        element.textContent = `$${usdValue.toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })}`;
-                    }
-                    element.classList.remove('nepali-font');
-                }
-            }
-        });
-    }
-
-    const savedCurrency = localStorage.getItem('currency') || 'usd';
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    
-    if (savedCurrency === 'npr') {
-        document.querySelector('.currency-btn[data-currency="npr"]').click();
-    }
-    
-    if (savedLanguage === 'np') {
-        document.querySelector('.language-option[data-lang="np"]').click();
-    }
-
-    const revenueCtx = document.getElementById('revenueChart');
-    if (revenueCtx) {
-        const revenueChart = new Chart(revenueCtx.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: [
-                    'January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'
-                ],
-                datasets: [{
-                    label: 'Revenue',
-                    data: [32000, 38000, 41000, 38500, 42580, 48000, 46000, 47000, 49000, 51000, 53000, 55000],
-                    borderColor: '#4361ee',
-                    backgroundColor: 'rgba(67, 97, 238, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim() || '#000',
+              callback: function(value) {
+                const nprValue = value * exchangeRate;
+                return `${currencySymbol} ${nprValue.toLocaleString('en-IN', { minimumFractionDigits: 0 })}`;
+              }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-light')
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-light'),
-                            callback: function(value) {
-                                if (currentCurrency === 'npr') {
-                                    return 'रु ' + (value * exchangeRate).toLocaleString('en-US', {
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 0
-                                    });
-                                }
-                                return '$' + value.toLocaleString('en-US', {
-                                    minimumFractionDigits: 0,
-                                    maximumFractionDigits: 0
-                                });
-                            }
-                        },
-                        grid: {
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--border-light')
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-light')
-                        },
-                        grid: {
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--border-light')
-                        }
-                    }
-                }
+            grid: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--border-light').trim() || '#ccc',
             }
-        });
-    }
-
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 992) {
-            sidebar.classList.remove('active');
-            mainContent.classList.remove('sidebar-active');
+          },
+          x: {
+            ticks: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim() || '#000',
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--border-light').trim() || '#ccc',
+            }
+          }
         }
+      }
+    });
+  }
+
+  // ---------------------------
+  // DYNAMIC METRIC UPDATES
+  // ---------------------------
+
+  function updateMetrics() {
+    document.querySelectorAll('.metric-value[data-value]').forEach(el => {
+      if (el.getAttribute('data-currency') === 'true') {
+        // Currency metric: update value slightly around current value
+        const currentValue = parseFloat(el.getAttribute('data-value'));
+        const change = (Math.random() * 500 - 250);
+        const newValue = Math.max(100, currentValue + change);
+        el.setAttribute('data-value', newValue.toFixed(0));
+        el.setAttribute('data-usd', newValue.toFixed(0));
+      } else {
+        // Non-currency metric
+        const currentValue = parseFloat(el.getAttribute('data-value'));
+        const change = Math.floor(Math.random() * 50 - 25);
+        const newValue = Math.max(10, currentValue + change);
+        el.setAttribute('data-value', newValue.toFixed(0));
+      }
     });
 
-    setInterval(updateMetrics, 30000);
-});
+    // Update % change indicators
+    document.querySelectorAll('.change-value').forEach(el => {
+      const isPositive = Math.random() > 0.3;
+      const percentage = (Math.random() * 15 + 1).toFixed(1);
+      el.textContent = `${percentage}%`;
 
-function updateMetrics() {
-    const metricValues = document.querySelectorAll('.metric-value[data-value]');
-    
-    metricValues.forEach(element => {
-        if (element.getAttribute('data-currency') === 'true') {
-            const currentValue = parseFloat(element.getAttribute('data-value'));
-            const change = (Math.random() * 500 - 250);
-            const newValue = Math.max(100, currentValue + change);
-            element.setAttribute('data-value', newValue.toFixed(0));
-            element.setAttribute('data-usd', newValue.toFixed(0));
+      const parent = el.closest('.metric-change');
+      if (parent) {
+        if (isPositive) {
+          parent.className = 'metric-change positive';
+          const icon = parent.querySelector('i');
+          if (icon) icon.className = 'fas fa-arrow-up me-1';
         } else {
-            const currentValue = parseFloat(element.getAttribute('data-value'));
-            const change = Math.floor(Math.random() * 50 - 25);
-            const newValue = Math.max(10, currentValue + change);
-            element.setAttribute('data-value', newValue.toFixed(0));
+          parent.className = 'metric-change negative';
+          const icon = parent.querySelector('i');
+          if (icon) icon.className = 'fas fa-arrow-down me-1';
         }
+      }
     });
 
-    const changeValues = document.querySelectorAll('.change-value');
-    changeValues.forEach(element => {
-        const isPositive = Math.random() > 0.3;
-        const percentage = (Math.random() * 15 + 1).toFixed(1);
-        element.textContent = `${percentage}%`;
-        
-        const parent = element.closest('.metric-change');
-        if (parent) {
-            if (isPositive) {
-                parent.className = 'metric-change positive';
-                const icon = parent.querySelector('i');
-                if (icon) icon.className = 'fas fa-arrow-up me-1';
-            } else {
-                parent.className = 'metric-change negative';
-                const icon = parent.querySelector('i');
-                if (icon) icon.className = 'fas fa-arrow-down me-1';
-            }
-        }
-    });
+    // Update currency display after metric change
+    updateCurrencyDisplay();
+  }
 
-    const savedCurrency = localStorage.getItem('currency') || 'usd';
-    const currencyElements = document.querySelectorAll('.currency-amount, .metric-value[data-currency="true"], .goal-value');
-    const exchangeRate = 133.5;
+  setInterval(updateMetrics, 30000); // Every 30 seconds
 
-    currencyElements.forEach(element => {
-        const usdValue = parseFloat(element.getAttribute('data-usd') || element.textContent.replace(/[^0-9.-]+/g, ""));
-        
-        if (!isNaN(usdValue)) {
-            if (savedCurrency === 'npr') {
-                const nprValue = usdValue * exchangeRate;
-                if (element.classList.contains('metric-value') || element.classList.contains('goal-value')) {
-                    element.textContent = `रु ${nprValue.toLocaleString('en-US', {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                    })}`;
-                } else {
-                    element.textContent = `रु ${nprValue.toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}`;
-                }
-                element.classList.add('nepali-font');
-            } else {
-                if (element.classList.contains('metric-value') || element.classList.contains('goal-value')) {
-                    element.textContent = `$${usdValue.toLocaleString('en-US', {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                    })}`;
-                } else {
-                    element.textContent = `$${usdValue.toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}`;
-                }
-                element.classList.remove('nepali-font');
-            }
-        }
-    });
-}
+  // Close sidebar on window resize (desktop)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+      sidebar.classList.remove('active');
+      mainContent.classList.remove('sidebar-active');
+    }
+  });
+});
