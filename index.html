@@ -13,14 +13,14 @@
     <!-- Header -->
     <header class="dashboard-header">
         <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center py-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
                 <div class="d-flex align-items-center">
                     <button class="toggle-sidebar me-3 d-lg-none" id="toggleSidebar">
                         <i class="fas fa-bars"></i>
                     </button>
                     <div class="logo">
                         <i class="fas fa-store me-2"></i>
-                        <span class="brand-name">ShopNepal Admin</span>
+                        <span class="brand-name" id="brandName">ShopNepal Admin</span>
                     </div>
                 </div>
 
@@ -40,14 +40,14 @@
 
                     <div class="user-profile">
                         <div class="dropdown">
-                            <button class="btn btn-link text-dark dropdown-toggle d-flex align-items-center" 
+                            <button class="btn btn-link dropdown-toggle d-flex align-items-center" 
                                     type="button" id="userDropdown" data-bs-toggle="dropdown">
                                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="user-avatar">
-                                <span class="user-name ms-2">Shreyas Sharma</span>
+                                <span class="user-name ms-2" id="userName">Shreyas Sharma</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                                <li><a class="dropdown-item" href="#account"><i class="fas fa-user me-2"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="#account"><i class="fas fa-cog me-2"></i> Settings</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                             </ul>
@@ -74,6 +74,7 @@
                             <a class="nav-link" href="#messages">
                                 <i class="fas fa-comments me-2"></i>
                                 <span class="menu-text">Messages</span>
+                                <span class="badge bg-danger float-end">3</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -86,6 +87,7 @@
                             <a class="nav-link" href="#orders">
                                 <i class="fas fa-shopping-cart me-2"></i>
                                 <span class="menu-text">Orders</span>
+                                <span class="badge bg-warning float-end">12</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -101,6 +103,21 @@
                             </a>
                         </li>
                     </ul>
+
+                    <!-- Excel Import Section -->
+                    <div class="excel-import mt-4 p-3 border-top">
+                        <h6 class="mb-3"><i class="fas fa-file-excel me-2 text-success"></i> 
+                            <span class="import-title">Import Offline Data</span>
+                        </h6>
+                        <input type="file" class="form-control form-control-sm mb-2" id="excelFile" accept=".csv">
+                        <button class="btn btn-sm btn-success w-100" id="importExcel">
+                            <i class="fas fa-upload me-1"></i>
+                            <span class="import-btn-text">Import Excel</span>
+                        </button>
+                        <small class="text-muted d-block mt-2 import-help">
+                            Upload offline sales data from Excel
+                        </small>
+                    </div>
                 </div>
             </nav>
 
@@ -108,8 +125,41 @@
             <main class="main-content col-lg-10 col-xl-10" id="mainContent">
                 <!-- Dashboard Section -->
                 <section id="dashboard" class="dashboard-section">
-                    <h3 class="mb-4">Dashboard Overview</h3>
-                    
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 id="dashboardTitle">Dashboard Overview</h3>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary active" data-period="today">Today</button>
+                            <button class="btn btn-sm btn-outline-primary" data-period="week">This Week</button>
+                            <button class="btn btn-sm btn-outline-primary" data-period="month">This Month</button>
+                        </div>
+                    </div>
+
+                    <!-- Business Type Toggle -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="business-toggle card">
+                                <div class="card-body py-2">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-primary active" data-business="all">
+                                                <i class="fas fa-globe me-2"></i>
+                                                <span class="business-text">All Business</span>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary" data-business="online">
+                                                <i class="fas fa-laptop me-2"></i>
+                                                <span class="business-text">Online Only</span>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary" data-business="offline">
+                                                <i class="fas fa-store me-2"></i>
+                                                <span class="business-text">Offline Only</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Stats Cards -->
                     <div class="row mb-4">
                         <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
@@ -117,10 +167,10 @@
                                 <div class="metric-icon sales-icon">
                                     <i class="fas fa-shopping-bag fa-2x"></i>
                                 </div>
-                                <div class="metric-value">रु 54,82,000</div>
+                                <div class="metric-value">रु 12,45,820</div>
                                 <div class="metric-title total-sales">Total Sales</div>
-                                <div class="metric-change positive">
-                                    <i class="fas fa-arrow-up me-1"></i> 12.5% from last month
+                                <div class="metric-breakdown">
+                                    <small>Online: रु 8,92,400 | Offline: रु 3,53,420</small>
                                 </div>
                             </div>
                         </div>
@@ -131,9 +181,9 @@
                                     <i class="fas fa-clipboard-check fa-2x"></i>
                                 </div>
                                 <div class="metric-value">1,248</div>
-                                <div class="metric-title new-orders">New Orders</div>
-                                <div class="metric-change positive">
-                                    <i class="fas fa-arrow-up me-1"></i> 8.3% from last month
+                                <div class="metric-title new-orders">Total Orders</div>
+                                <div class="metric-breakdown">
+                                    <small>Online: 892 | Offline: 356</small>
                                 </div>
                             </div>
                         </div>
@@ -143,10 +193,10 @@
                                 <div class="metric-icon customers-icon">
                                     <i class="fas fa-users fa-2x"></i>
                                 </div>
-                                <div class="metric-value">45,892</div>
+                                <div class="metric-value">8,542</div>
                                 <div class="metric-title customers-reached">Customers Reached</div>
-                                <div class="metric-change positive">
-                                    <i class="fas fa-arrow-up me-1"></i> 15.7% from last month
+                                <div class="metric-breakdown">
+                                    <small>Online: 5,892 | Offline: 2,650</small>
                                 </div>
                             </div>
                         </div>
@@ -158,8 +208,8 @@
                                 </div>
                                 <div class="metric-value">1,148</div>
                                 <div class="metric-title products-delivered">Products Delivered</div>
-                                <div class="metric-change negative">
-                                    <i class="fas fa-arrow-down me-1"></i> 2.1% from last month
+                                <div class="metric-breakdown">
+                                    <small>Online: 892 | Offline: 256</small>
                                 </div>
                             </div>
                         </div>
@@ -169,47 +219,71 @@
                     <div class="row mb-4">
                         <div class="col-xl-8 col-lg-7 mb-3">
                             <div class="chart-container">
-                                <h5 class="chart-title sales-graph-title">Sales Graph (Last 6 Months)</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="chart-title sales-graph-title">Sales Comparison</h5>
+                                    <div class="chart-legend">
+                                        <span class="legend-online me-3"><i class="fas fa-circle text-primary me-1"></i> Online</span>
+                                        <span class="legend-offline"><i class="fas fa-circle text-success me-1"></i> Offline</span>
+                                    </div>
+                                </div>
                                 <canvas id="salesChart"></canvas>
                             </div>
                         </div>
                         
                         <div class="col-xl-4 col-lg-5 mb-3">
                             <div class="chart-container">
-                                <h5 class="chart-title product-categories-title">Product Categories</h5>
-                                <canvas id="categoryChart"></canvas>
+                                <h5 class="chart-title product-categories-title">Revenue Sources</h5>
+                                <canvas id="revenueChart"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Best Selling Product and Order List -->
+                    <!-- Best Selling Products and Recent Orders -->
                     <div class="row">
                         <div class="col-xl-4 col-lg-6 mb-3">
                             <div class="card best-product-card">
                                 <div class="card-header">
-                                    <i class="fas fa-crown me-2"></i>
-                                    <span class="best-selling-title">Best Selling Product</span>
+                                    <i class="fas fa-crown me-2 text-warning"></i>
+                                    <span class="best-selling-title">Best Selling Products</span>
                                 </div>
                                 <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=200" class="best-product-img">
-                                        <div class="ms-3">
-                                            <h5 class="mb-1">Wireless Headphones</h5>
-                                            <p class="text-muted mb-0">Electronics</p>
+                                    <div class="best-product-item mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=200" class="best-product-img">
+                                            <div class="ms-3">
+                                                <h6 class="mb-1">Wireless Headphones</h6>
+                                                <p class="text-muted mb-0 small">Electronics</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-stats">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Total Sales:</span>
+                                                <span class="fw-bold">रु 1,25,480</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span>Online/Offline:</span>
+                                                <span class="fw-bold">892/362</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product-stats">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <span>Total Sales:</span>
-                                            <span class="fw-bold">रु 1,25,480</span>
+                                    
+                                    <div class="best-product-item">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=200" class="best-product-img">
+                                            <div class="ms-3">
+                                                <h6 class="mb-1">Running Shoes</h6>
+                                                <p class="text-muted mb-0 small">Sports</p>
+                                            </div>
                                         </div>
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <span>Units Sold:</span>
-                                            <span class="fw-bold">284</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Stock Left:</span>
-                                            <span class="fw-bold text-success">42</span>
+                                        <div class="product-stats">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Total Sales:</span>
+                                                <span class="fw-bold">रु 98,500</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span>Online/Offline:</span>
+                                                <span class="fw-bold">542/185</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -220,43 +294,283 @@
                             <div class="table-container recent-orders">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="table-title recent-orders-title">Recent Orders</h5>
-                                    <a href="#orders" class="btn btn-sm btn-primary view-all-btn">View All</a>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-outline-primary active" data-type="all">All</button>
+                                        <button class="btn btn-sm btn-outline-primary" data-type="online">Online</button>
+                                        <button class="btn btn-sm btn-outline-primary" data-type="offline">Offline</button>
+                                    </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="ordersTable">
                                         <thead>
                                             <tr>
                                                 <th>Order ID</th>
                                                 <th>Customer</th>
                                                 <th>Amount</th>
+                                                <th>Type</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>#ORD-7841</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="product-img">
-                                                        <span>Sarah Johnson</span>
-                                                    </div>
-                                                </td>
-                                                <td>रु 33,200</td>
-                                                <td><span class="order-status status-delivered">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#ORD-7840</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="https://randomuser.me/api/portraits/men/44.jpg" class="product-img">
-                                                        <span>Michael Chen</span>
-                                                    </div>
-                                                </td>
-                                                <td>रु 25,400</td>
-                                                <td><span class="order-status status-processing">Processing</span></td>
-                                            </tr>
+                                            <!-- Orders will be loaded here -->
                                         </tbody>
                                     </table>
+                                </div>
+                                <a href="#orders" class="btn btn-sm btn-primary w-100 view-all-btn">View All Orders</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Messages Section -->
+                <section id="messages" class="dashboard-section" style="display: none;">
+                    <h3 class="mb-4">Messages</h3>
+                    
+                    <div class="row">
+                        <!-- Message Platforms -->
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-instagram fa-3x text-danger mb-3"></i>
+                                    <h5>Instagram DM</h5>
+                                    <p class="text-muted">Connect your Instagram account to manage messages</p>
+                                    <button class="btn btn-outline-danger">
+                                        <i class="fab fa-instagram me-2"></i> Connect Instagram
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-facebook fa-3x text-primary mb-3"></i>
+                                    <h5>Facebook Messenger</h5>
+                                    <p class="text-muted">Connect Facebook to manage customer messages</p>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fab fa-facebook me-2"></i> Connect Facebook
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-whatsapp fa-3x text-success mb-3"></i>
+                                    <h5>WhatsApp Business</h5>
+                                    <p class="text-muted">Integrate WhatsApp for business communication</p>
+                                    <button class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-2"></i> Connect WhatsApp
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Inbox -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Recent Messages</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="message-list">
+                                <!-- Messages will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Products Section -->
+                <section id="products" class="dashboard-section" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3>Products Management</h3>
+                        <button class="btn btn-primary" id="addProductBtn">
+                            <i class="fas fa-plus me-2"></i> Add New Product
+                        </button>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" placeholder="Search products..." id="productSearch">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control" id="productCategory">
+                                                <option value="">All Categories</option>
+                                                <option value="electronics">Electronics</option>
+                                                <option value="clothing">Clothing</option>
+                                                <option value="books">Books</option>
+                                                <option value="sports">Sports</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="productsList">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="dashboard-section" style="display: none;">
+                    <h3 class="mb-4">Orders Management</h3>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search orders..." id="orderSearch">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" id="orderFilter">
+                                <option value="all">All Orders</option>
+                                <option value="online">Online Orders</option>
+                                <option value="offline">Offline Orders</option>
+                                <option value="pending">Pending</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Date</th>
+                                            <th>Customer</th>
+                                            <th>Amount</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="allOrdersTable">
+                                        <!-- All orders will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Content Section -->
+                <section id="content" class="dashboard-section" style="display: none;">
+                    <h3 class="mb-4">Content Creation</h3>
+                    
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5 class="mb-0"><i class="fas fa-image me-2"></i> AI Image Generation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Enter description for image:</label>
+                                        <textarea class="form-control" rows="3" placeholder="Describe the image you want to generate..."></textarea>
+                                    </div>
+                                    <button class="btn btn-primary w-100">
+                                        <i class="fas fa-robot me-2"></i> Generate Image
+                                    </button>
+                                    
+                                    <div class="mt-4">
+                                        <h6>Recent Generated Images:</h6>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <img src="https://via.placeholder.com/100" class="img-thumbnail">
+                                            </div>
+                                            <div class="col-4">
+                                                <img src="https://via.placeholder.com/100" class="img-thumbnail">
+                                            </div>
+                                            <div class="col-4">
+                                                <img src="https://via.placeholder.com/100" class="img-thumbnail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5 class="mb-0"><i class="fas fa-video me-2"></i> AI Video Generation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Video description:</label>
+                                        <textarea class="form-control" rows="3" placeholder="Describe the video content..."></textarea>
+                                    </div>
+                                    <button class="btn btn-success w-100">
+                                        <i class="fas fa-film me-2"></i> Generate Video
+                                    </button>
+                                    
+                                    <div class="mt-4">
+                                        <h6>Upload Media:</h6>
+                                        <input type="file" class="form-control mb-2" accept="image/*,video/*">
+                                        <button class="btn btn-outline-secondary w-100">
+                                            <i class="fas fa-upload me-2"></i> Upload Content
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Account Section -->
+                <section id="account" class="dashboard-section" style="display: none;">
+                    <h3 class="mb-4">Account Settings</h3>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="rounded-circle mb-3" width="120">
+                                    <h5>Shreyas Sharma</h5>
+                                    <p class="text-muted">Admin</p>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-edit me-2"></i> Edit Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Settings</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Store Name</label>
+                                        <input type="text" class="form-control" value="ShopNepal">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="shreyas@shopnepal.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone</label>
+                                        <input type="text" class="form-control" value="+977 9800000000">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Address</label>
+                                        <textarea class="form-control" rows="2">Kathmandu, Nepal</textarea>
+                                    </div>
+                                    <button class="btn btn-primary">Save Changes</button>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +582,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <p class="mb-1">© 2023 Copyright Reserved to Shreyas Sharma. All rights reserved.</p>
-                            <small class="text-muted">Nepali Currency (रु) | Language: English/नेपाली</small>
+                            <small class="text-muted">Nepali Currency (रु) | Language: English/नेपाली | Online + Offline Business</small>
                         </div>
                     </div>
                 </footer>
@@ -276,7 +590,52 @@
         </div>
     </div>
 
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm">
+                        <div class="mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price (रु)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-control">
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="books">Books</option>
+                                <option value="sports">Sports</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Stock Quantity</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveProduct">Save Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
-              </html>
+    </html>
