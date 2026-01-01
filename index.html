@@ -1,113 +1,282 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard - Shreyas Sharma</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pO1qLkFJ3yOdL+UxZ7vXxzqLqCGKX07a9Px9PZ3L2KLO7FUMh9rG4PoOW0vT+d7xTfujrP7L3UxyI02TOxk3kQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal eCommerce Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="dashboard-header">
-    <div class="logo" data-key="dashboard">Dashboard</div>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="d-flex align-items-center">
+                    <button class="toggle-sidebar me-3 d-lg-none" id="toggleSidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <i class="fas fa-store me-2"></i>
+                        <span class="brand-name">ShopNepal Admin</span>
+                    </div>
+                </div>
 
-    <button id="toggleSidebar" class="toggle-sidebar" aria-label="Toggle Sidebar">☰</button>
+                <div class="control-panel d-flex align-items-center">
+                    <div class="language-toggle me-3">
+                        <button class="btn btn-sm btn-outline-primary" id="languageToggle">
+                            <i class="fas fa-language"></i>
+                            <span>English</span>
+                        </button>
+                    </div>
 
-    <div class="control-panel">
-      <!-- Language Switcher -->
-      <div class="language-switcher" id="languageSwitcher">
-        <button
-          class="language-btn"
-          id="languageBtn"
-          aria-haspopup="listbox"
-          aria-expanded="false"
-          aria-label="Select Language"
-        >
-          <span id="currentLanguage">English</span> ▼
-        </button>
-        <ul class="language-list" id="languageList" role="listbox" tabindex="-1" aria-label="Language options" hidden>
-          <li role="option" data-lang="en" tabindex="0" aria-selected="true">English</li>
-          <li role="option" data-lang="np" tabindex="0" aria-selected="false">नेपाली</li>
-        </ul>
-      </div>
+                    <div class="theme-toggle me-3">
+                        <button class="btn btn-sm btn-outline-secondary" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
 
-      <!-- Theme toggle -->
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme" title="Switch to Dark Mode">
-        <i class="fas fa-moon"></i><span class="visually-hidden">Dark Mode</span>
-      </button>
+                    <div class="user-profile">
+                        <div class="dropdown">
+                            <button class="btn btn-link text-dark dropdown-toggle d-flex align-items-center" 
+                                    type="button" id="userDropdown" data-bs-toggle="dropdown">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="user-avatar">
+                                <span class="user-name ms-2">Shreyas Sharma</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-      <!-- Currency display only Nepali Rs -->
-      <div class="currency-display" aria-label="Currency">रु</div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="sidebar col-lg-2 col-xl-2" id="sidebar">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#dashboard">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                <span class="menu-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#messages">
+                                <i class="fas fa-comments me-2"></i>
+                                <span class="menu-text">Messages</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#products">
+                                <i class="fas fa-box me-2"></i>
+                                <span class="menu-text">Products</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#orders">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                <span class="menu-text">Orders</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#content">
+                                <i class="fas fa-photo-video me-2"></i>
+                                <span class="menu-text">Content</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#account">
+                                <i class="fas fa-user-circle me-2"></i>
+                                <span class="menu-text">Account</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-      <!-- User avatar and name -->
-      <img src="user.jpg" alt="User Avatar" class="user-avatar" />
-      <span class="user-name">Shreyas Sharma</span>
+            <!-- Main Content -->
+            <main class="main-content col-lg-10 col-xl-10" id="mainContent">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="dashboard-section">
+                    <h3 class="mb-4">Dashboard Overview</h3>
+                    
+                    <!-- Stats Cards -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                            <div class="metric-card">
+                                <div class="metric-icon sales-icon">
+                                    <i class="fas fa-shopping-bag fa-2x"></i>
+                                </div>
+                                <div class="metric-value">रु 54,82,000</div>
+                                <div class="metric-title total-sales">Total Sales</div>
+                                <div class="metric-change positive">
+                                    <i class="fas fa-arrow-up me-1"></i> 12.5% from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                            <div class="metric-card">
+                                <div class="metric-icon orders-icon">
+                                    <i class="fas fa-clipboard-check fa-2x"></i>
+                                </div>
+                                <div class="metric-value">1,248</div>
+                                <div class="metric-title new-orders">New Orders</div>
+                                <div class="metric-change positive">
+                                    <i class="fas fa-arrow-up me-1"></i> 8.3% from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                            <div class="metric-card">
+                                <div class="metric-icon customers-icon">
+                                    <i class="fas fa-users fa-2x"></i>
+                                </div>
+                                <div class="metric-value">45,892</div>
+                                <div class="metric-title customers-reached">Customers Reached</div>
+                                <div class="metric-change positive">
+                                    <i class="fas fa-arrow-up me-1"></i> 15.7% from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                            <div class="metric-card">
+                                <div class="metric-icon delivery-icon">
+                                    <i class="fas fa-shipping-fast fa-2x"></i>
+                                </div>
+                                <div class="metric-value">1,148</div>
+                                <div class="metric-title products-delivered">Products Delivered</div>
+                                <div class="metric-change negative">
+                                    <i class="fas fa-arrow-down me-1"></i> 2.1% from last month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts and Best Selling -->
+                    <div class="row mb-4">
+                        <div class="col-xl-8 col-lg-7 mb-3">
+                            <div class="chart-container">
+                                <h5 class="chart-title sales-graph-title">Sales Graph (Last 6 Months)</h5>
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-4 col-lg-5 mb-3">
+                            <div class="chart-container">
+                                <h5 class="chart-title product-categories-title">Product Categories</h5>
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Selling Product and Order List -->
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 mb-3">
+                            <div class="card best-product-card">
+                                <div class="card-header">
+                                    <i class="fas fa-crown me-2"></i>
+                                    <span class="best-selling-title">Best Selling Product</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=200" class="best-product-img">
+                                        <div class="ms-3">
+                                            <h5 class="mb-1">Wireless Headphones</h5>
+                                            <p class="text-muted mb-0">Electronics</p>
+                                        </div>
+                                    </div>
+                                    <div class="product-stats">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Total Sales:</span>
+                                            <span class="fw-bold">रु 1,25,480</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Units Sold:</span>
+                                            <span class="fw-bold">284</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Stock Left:</span>
+                                            <span class="fw-bold text-success">42</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-8 col-lg-6 mb-3">
+                            <div class="table-container recent-orders">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="table-title recent-orders-title">Recent Orders</h5>
+                                    <a href="#orders" class="btn btn-sm btn-primary view-all-btn">View All</a>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Customer</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#ORD-7841</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="product-img">
+                                                        <span>Sarah Johnson</span>
+                                                    </div>
+                                                </td>
+                                                <td>रु 33,200</td>
+                                                <td><span class="order-status status-delivered">Delivered</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#ORD-7840</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://randomuser.me/api/portraits/men/44.jpg" class="product-img">
+                                                        <span>Michael Chen</span>
+                                                    </div>
+                                                </td>
+                                                <td>रु 25,400</td>
+                                                <td><span class="order-status status-processing">Processing</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="mt-5 pt-4 border-top">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="mb-1">© 2023 Copyright Reserved to Shreyas Sharma. All rights reserved.</p>
+                            <small class="text-muted">Nepali Currency (रु) | Language: English/नेपाली</small>
+                        </div>
+                    </div>
+                </footer>
+            </main>
+        </div>
     </div>
-  </header>
 
-  <aside id="sidebar" class="sidebar">
-    <nav class="sidebar-sticky">
-      <a href="#" class="nav-link active" data-key="dashboard">Dashboard</a>
-      <a href="#" class="nav-link" data-key="orders">Orders</a>
-      <a href="#" class="nav-link" data-key="analytics">Analytics</a>
-      <a href="#" class="nav-link" data-key="products">Products</a>
-      <a href="#" class="nav-link" data-key="customers">Customers</a>
-      <a href="#" class="nav-link" data-key="inventory">Inventory</a>
-      <a href="#" class="nav-link" data-key="reports">Reports</a>
-      <a href="#" class="nav-link" data-key="settings">Settings</a>
-    </nav>
-  </aside>
-
-  <main id="mainContent" class="main-content">
-    <section class="search-container">
-      <input
-        type="text"
-        class="form-control"
-        data-key="searchPlaceholder"
-        placeholder="Search orders, products, customers..."
-        aria-label="Search"
-      />
-    </section>
-
-    <section class="metrics-grid">
-      <!-- Example metric cards -->
-      <div class="metric-card">
-        <div class="metric-icon orders-icon"><i class="fas fa-shopping-cart"></i></div>
-        <div class="metric-value" data-value="1280" data-usd="1280" data-currency="true">रु 170,000</div>
-        <div class="metric-title" data-key="ordersCompleted">Orders Completed</div>
-        <div class="metric-change positive"><i class="fas fa-arrow-up me-1"></i><span class="change-value">12.5%</span></div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-icon revenue-icon"><i class="fas fa-dollar-sign"></i></div>
-        <div class="metric-value" data-value="38500" data-usd="38500" data-currency="true">रु 5,138,775</div>
-        <div class="metric-title" data-key="totalRevenue">Total Revenue</div>
-        <div class="metric-change negative"><i class="fas fa-arrow-down me-1"></i><span class="change-value">3.4%</span></div>
-      </div>
-
-      <!-- Add more metric cards as needed -->
-    </section>
-
-    <section class="chart-container">
-      <h2 class="chart-title" data-key="revenueAnalytics">Revenue Analytics (Last 6 Months)</h2>
-      <canvas id="revenueChart" aria-label="Revenue chart" role="img"></canvas>
-    </section>
-
-    <!-- More dashboard content here -->
-
-  </main>
-
-  <footer>
-    <div class="text-center">© 2025 Shreyas Sharma. All rights reserved.</div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
-</html>
+              </html>
