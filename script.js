@@ -234,10 +234,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const revenueChart = new Chart(revenueCtx.getContext('2d'), {
             type: 'line',
             data: {
-                labels: ['जनवरी', 'फेब्रुअरी', 'मार्च', 'अप्रिल', 'मे', 'जुन'],
+                labels: [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ],
                 datasets: [{
-                    label: 'आय',
-                    data: [32000, 38000, 41000, 38500, 42580, 48000],
+                    label: 'Revenue',
+                    data: [32000, 38000, 41000, 38500, 42580, 48000, 46000, 47000, 49000, 51000, 53000, 55000],
                     borderColor: '#4361ee',
                     backgroundColor: 'rgba(67, 97, 238, 0.1)',
                     borderWidth: 3,
